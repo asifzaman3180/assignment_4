@@ -2,6 +2,6 @@
 
 int main()
 {
-    printf("Your Name Here\n"); // Replace "Your Name Here" with your actual name
+    printf("Md. Mehedi Hasan Arzu\n");
     return 0;
 }
