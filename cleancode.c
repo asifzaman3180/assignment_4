@@ -1,5 +1,26 @@
 #include <stdio.h>
 
+
+float calculateAverage(int marks[], int numSubjects) {
+    int total = 0;
+    for (int i = 0; i < numSubjects; i++) {
+        total += marks[i];
+    }
+    return total / (float)numSubjects;
+}
+
+
+char getGrade(float average) {
+    if (average >= 80)
+        return 'A';
+    else if (average >= 60)
+        return 'B';
+    else if (average >= 40)
+        return 'C';
+    else
+        return 'F';
+}
+
 int main() {
     int marks[3][3] = {
         {50, 60, 70},
@@ -7,41 +28,32 @@ int main() {
         {30, 40, 50}
     };
     char names[3][10] = {"Ali", "Bob", "Cat"};
-    int student, subject, total;
+
+    int numStudents = 3, numSubjects = 3;
     float average;
+    int total, highestTotal = 0, topperIndex = 0;
 
-    for (student = 0; student < 3; student++) {
-        total = 0;
-        for (subject = 0; subject < 3; subject++) {
-            total += marks[student][subject];
-        }
+    
+    for (int student = 0; student < numStudents; student++) {
+        average = calculateAverage(marks[student], numSubjects);
+        char grade = getGrade(average);
 
-        average = total / 3.0;
-
-        if (average >= 80)
-            printf("%s Grade A avg = %.2f\n", names[student], average);
-        else if (average >= 60)
-            printf("%s Grade B avg = %.2f\n", names[student], average);
-        else if (average >= 40)
-            printf("%s Grade C avg = %.2f\n", names[student], average);
-        else
-            printf("%s Fail avg = %.2f\n", names[student], average);
+        printf("%s Grade %c (avg = %.2f)\n", names[student], grade, average);
     }
 
-    int highestTotal = 0, topperIndex = 0;
-    for (student = 0; student < 3; student++) {
+    
+    for (int student = 0; student < numStudents; student++) {
         total = 0;
-        for (subject = 0; subject < 3; subject++) {
+        for (int subject = 0; subject < numSubjects; subject++) {
             total += marks[student][subject];
         }
-
         if (total > highestTotal) {
             highestTotal = total;
             topperIndex = student;
         }
     }
 
-    printf("Topper: %s with total %d\n", names[topperIndex], highestTotal);
+    printf("\nTopper: %s with total %d\n", names[topperIndex], highestTotal);
 
     return 0;
 }
