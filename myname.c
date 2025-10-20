@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    printf("Your Name Here\n"); // Replace "Your Name Here" with your actual name
+    printf("Ridwan Mahfuz Nill\n"); // Replace "Your Name Here" with your actual name
+    printf("Student ID: s2411176144\n");
     return 0;
 }
