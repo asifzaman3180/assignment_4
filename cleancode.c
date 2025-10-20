@@ -1,40 +1,61 @@
-#include<stdio.h>
+#include <stdio.h>
+
+#define NUM_STUDENTS 3
+#define NUM_SUBJECTS 3
+
+void calculateAndDisplayGrades(int marks[][NUM_SUBJECTS], char names[][10]);
+int calculateTotal(int marks[]);
+char determineGrade(float average);
+void displayTopper(int marks[][NUM_SUBJECTS], char names[][10]);
 
 int main() {
-    int marks[3][3] = {{50, 60, 70}, {80, 90, 100}, {30, 40, 50}};
-    char names[3][10] = {"Ali", "Bob", "Cat"};
-    int student_index, subject_index, total_marks;
-    float average_marks;
+    int marks[NUM_STUDENTS][NUM_SUBJECTS] = {
+        {50, 60, 70},
+        {80, 90, 100},
+        {30, 40, 50}
+    };
+    char names[NUM_STUDENTS][10] = {"Ali", "Bob", "Cat"};
     
-    for(student_index = 0; student_index < 3; student_index++) {
-        total_marks = 0;
-        for(subject_index = 0; subject_index < 3; subject_index++) {
-            total_marks += marks[student_index][subject_index];
-        }
-        average_marks = total_marks / 3.0;
-        
-        if(average_marks >= 80)
-            printf("%s Grade A avg=%.2f\n", names[student_index], average_marks);
-        else if(average_marks >= 60)
-            printf("%s Grade B avg=%.2f\n", names[student_index], average_marks);
-        else if(average_marks >= 40)
-            printf("%s Grade C avg=%.2f\n", names[student_index], average_marks);
-        else
-            printf("%s Fail avg=%.2f\n", names[student_index], average_marks);
-    }
+    calculateAndDisplayGrades(marks, names);
+    displayTopper(marks, names);
     
-    int max_total = 0, topper_index = 0;
-    for(student_index = 0; student_index < 3; student_index++) {
-        total_marks = 0;
-        for(subject_index = 0; subject_index < 3; subject_index++) {
-            total_marks += marks[student_index][subject_index];
-        }
-        if(total_marks > max_total) {
-            max_total = total_marks;
-            topper_index = student_index;
-        }
-    }
-    
-    printf("Topper: %s with total %d\n", names[topper_index], max_total);
     return 0;
+}
+
+int calculateTotal(int marks[]) {
+    int total = 0;
+    for (int i = 0; i < NUM_SUBJECTS; i++) {
+        total += marks[i];
+    }
+    return total;
+}
+
+char determineGrade(float average) {
+    if (average >= 80) return 'A';
+    if (average >= 60) return 'B';
+    if (average >= 40) return 'C';
+    return 'F';
+}
+
+void calculateAndDisplayGrades(int marks[][NUM_SUBJECTS], char names[][10]) {
+    for (int i = 0; i < NUM_STUDENTS; i++) {
+        int total = calculateTotal(marks[i]);
+        float average = total / (float)NUM_SUBJECTS;
+        char grade = determineGrade(average);
+        printf("%s Grade %c avg=%.2f\n", names[i], grade, average);
+    }
+}
+
+void displayTopper(int marks[][NUM_SUBJECTS], char names[][10]) {
+    int maxTotal = 0, topperIndex = 0;
+    
+    for (int i = 0; i < NUM_STUDENTS; i++) {
+        int total = calculateTotal(marks[i]);
+        if (total > maxTotal) {
+            maxTotal = total;
+            topperIndex = i;
+        }
+    }
+    
+    printf("Topper: %s with total %d\n", names[topperIndex], maxTotal);
 }
