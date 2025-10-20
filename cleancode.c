@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Calculate average marks
 float calculateAverage(int marks[], int n) {
     int sum = 0;
     for(int i = 0; i < n; i++)
@@ -7,6 +8,7 @@ float calculateAverage(int marks[], int n) {
     return sum / (float)n;
 }
 
+// Get grade based on average
 char getGrade(float avg) {
     if(avg >= 80) return 'A';
     else if(avg >= 60) return 'B';
@@ -23,10 +25,12 @@ int main() {
     char names[3][10] = {"Ali", "Bob", "Cat"};
     int maxTotal = 0, topperIndex = 0;
 
+    printf("=== Student Report ===\n\n");
+
     for(int i = 0; i < 3; i++) {
         float avg = calculateAverage(marks[i], 3);
         char grade = getGrade(avg);
-        printf("%s Grade %c avg=%.2f\n", names[i], grade, avg);
+        printf("%-5s | Grade: %c | Average: %.2f\n", names[i], grade, avg);
 
         int total = (int)(avg * 3);
         if(total > maxTotal) {
@@ -35,6 +39,6 @@ int main() {
         }
     }
 
-    printf("Topper: %s with total %d\n", names[topperIndex], maxTotal);
+    printf("\nTopper: %s with total %d marks 🏆\n", names[topperIndex], maxTotal);
     return 0;
 }
