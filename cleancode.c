@@ -1,9 +1,11 @@
 #include <stdio.h>
 
+// Function to calculate sum of 3 subjects
 int summation(int a, int b, int c) {
     return a + b + c;
 }
 
+// Function to calculate average and print grade
 void average(int total, char *name) {
     float avg = total / 3.0;
 
@@ -28,11 +30,13 @@ int main() {
     int i, sum;
     int maximum = 0, position = 0;
 
+    // Print each student's grade
     for (i = 0; i < 3; i++) {
         sum = summation(marks[i][0], marks[i][1], marks[i][2]);
         average(sum, students[i]);
     }
 
+    // Find topper
     for (i = 0; i < 3; i++) {
         sum = summation(marks[i][0], marks[i][1], marks[i][2]);
         if (sum > maximum) {
