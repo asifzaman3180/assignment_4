@@ -1,11 +1,18 @@
 #include <stdio.h>
 
-// Function to calculate average marks
+// -----------------------------------------------
+// Function: calculateAverage
+// Purpose : To calculate the average marks of a student
+// -----------------------------------------------
 float calculateAverage(int total, int subjects) {
     return (float) total / subjects;
 }
 
-// Function to return grade based on average
+// -----------------------------------------------
+// Function: getGrade
+// Purpose : To return a grade character (A, B, C, F)
+//           based on the student's average marks
+// -----------------------------------------------
 char getGrade(float average) {
     if (average >= 80)
         return 'A';
@@ -17,27 +24,42 @@ char getGrade(float average) {
         return 'F';
 }
 
-// Function to print student name, grade, and average
+// -----------------------------------------------
+// Function: printStudentResult
+// Purpose : To display a student's name, grade, and average
+// -----------------------------------------------
 void printStudentResult(char name[], float average) {
     char grade = getGrade(average);
+
     if (grade == 'F')
-        printf("%s - Fail (Average = %.2f)\n", name, average);
+        printf("%-10s | %-10s | Average: %.2f\n", name, "Fail", average);
     else
-        printf("%s - Grade %c (Average = %.2f)\n", name, grade, average);
+        printf("%-10s | Grade %-4c | Average: %.2f\n", name, grade, average);
 }
 
 int main() {
-    int marks[3][3] = {{50, 60, 70}, {80, 90, 100}, {30, 40, 50}};
+    // Student data: names and marks
     char names[3][10] = {"Ali", "Bob", "Cat"};
+    int marks[3][3] = {
+        {50, 60, 70},
+        {80, 90, 100},
+        {30, 40, 50}
+    };
+
     int student, subject, total;
     float average;
+    int highestTotal = 0, topperIndex = 0;
 
-    int highestTotal = 0;
-    int topperIndex = 0;
+    // -----------------------------------------------
+    // Display header for the result section
+    // -----------------------------------------------
+    printf("=========================================\n");
+    printf("         STUDENT RESULT SUMMARY          \n");
+    printf("=========================================\n\n");
 
+    // Calculate and display each student's result
     for (student = 0; student < 3; student++) {
         total = 0;
-
         for (subject = 0; subject < 3; subject++) {
             total += marks[student][subject];
         }
@@ -45,13 +67,19 @@ int main() {
         average = calculateAverage(total, 3);
         printStudentResult(names[student], average);
 
+        // Track the highest total for topper
         if (total > highestTotal) {
             highestTotal = total;
             topperIndex = student;
         }
     }
 
-    printf("\nTopper: %s with total marks = %d\n", names[topperIndex], highestTotal);
+    // -----------------------------------------------
+    // Display topper information
+    // -----------------------------------------------
+    printf("\n=========================================\n");
+    printf("Topper: %-10s | Total Marks: %d\n", names[topperIndex], highestTotal);
+    printf("=========================================\n");
 
     return 0;
 }
