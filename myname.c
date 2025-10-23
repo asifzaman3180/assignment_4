@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main() {
-    printf("Rinza Faria Pinkey \n");
-    printf("ID: 2312276129");
+    printf("Nafiul Hasan Niloy \n");
+    printf("ID:2410476110\n");
 
     return 0;
 }
