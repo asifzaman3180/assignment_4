@@ -34,7 +34,7 @@ int main(){
     return 0;   
 }
 
-//function to calculate average marks
+   //function to calculate average marks
 
 float calculateAverage(int marks[]){
        int sum=0;
